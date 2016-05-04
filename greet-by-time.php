@@ -1,20 +1,35 @@
 <?php
-/*
-	Plugin Name: Greet By Time
-	Plugin URI: https://www.github.com/sburns90/WP-greet-by-time/
-	Description: Replace the unprofessional 'Howdy' message with a greeting based on time of day.
+	/*
+	Plugin Name: SB - Greet Admin By Time
+	Plugin URI: http://wordpress.org/plugins/greet-admin-by-time/
+	Description: Changes Howdy message to greet admin depending on time of day. Original concept by Alexader C. Block, complete rewrite by Stephen Burns.
 	Version: 1.1
 	Author: Stephen Burns
 	Author URI: http://www.StephenBurns.net
-	License: GPLv2
-*/
+	License: GPL2
+	*/
+
+	/*  Copyright 2015 Stephen Burns  (email : Stephen@StephenBurns.net)
+	
+    	This program is free software; you can redistribute it and/or modify
+    	it under the terms of the GNU General Public License, version 2, as 
+    	published by the Free Software Foundation.
+	
+    	This program is distributed in the hope that it will be useful,
+    	but WITHOUT ANY WARRANTY; without even the implied warranty of
+    	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    	GNU General Public License for more details.
+	
+    	You should have received a copy of the GNU General Public License
+    	along with this program; if not, write to the Free Software
+    	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	*/
+
+	/* TO DO:
+	 * UNFISHIED (4-18-16) Use the user's computer time rather than the servers time. */
 ?>
 
 <?php
-/* TODO: Make the script use the USER time. Either get the user's time 
-   from the timezone listed in their profile OR query their computer for the time.
-*/
-   
 add_filter('admin_bar_menu', 'change_howdy', 10, 3);
 
 function change_howdy($wp_admin_bar) {
@@ -37,13 +52,14 @@ function change_howdy($wp_admin_bar) {
 	$current_user = wp_get_current_user();
 
 	if ( 0 != $user_id ) {
-		/* Add the "My Account" menu */
-		$newtitle = sprintf( __('%1$s, %2$s'), $greet, $current_user->display_name );
-	
-		$wp_admin_bar->add_node( array(
-			'id' => 'my-account',
-				'title' => $newtitle
-			) );
-	}
-}   
+	/* Add the "My Account" menu */
+	$newtitle = sprintf( __('%1$s, %2$s'), $greet, $current_user->display_name );
+  
+	$wp_admin_bar->add_node( array(
+		'id' => 'my-account',
+            'title' => $newtitle
+        ) );
+    }
+}
+    
 ?>
